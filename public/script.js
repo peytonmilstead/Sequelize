@@ -6,25 +6,22 @@ async function populateRestaurants() {
   const hallName = document.querySelector('.hallName');
   const hallAddress = document.querySelector('.hallAddress');
 
-  diningData.data.forEach((restaurant) => {
-    const appendID = document.createElement('td');
-    const appendName = document.createElement('td');
-    const appendAddress = document.createElement('td');
+  const targetArea = document.querySelector('.table');
 
-    appendID.innerHTML = `
-    <span>${restaurant.hall_id}</span>
+  diningData.data.forEach((restaurant) => {
+    const appendItem = document.createElement('tr');
+    // const appendID = document.createElement('td')
+    // const appendName = document.createElement('td');
+    // const appendAddress = document.createElement('td');
+
+
+    appendItem.innerHTML = `
+    <td>${restaurant.hall_id}</td>
+    <td>${restaurant.hall_name}</td>
+    <td>${restaurant.hall_address.split(',')[0]}<br/>${restaurant.hall_address.split(',')[1]}</td>
     `;
-    appendName.innerHTML = `
-    <span>${restaurant.hall_name}</span>
-    `;
-    appendAddress.innerHTML = `
-    <span>${restaurant.hall_address.split(',')[0]}</span>
-    <span>${restaurant.hall_address.split(',')[1]}</span>
-    `;
-    
-    hallID.append(appendID);
-    hallName.append(appendName);
-    hallAddress.append(appendAddress);
+
+    targetArea.append(appendItem);
   });
 }
 
