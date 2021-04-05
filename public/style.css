@@ -1,6 +1,11 @@
 html{
     background-color: rgba(151, 177, 198, 0.894);
 }
+#chartContainer {
+    height: 300px;
+    width: 100%;
+}
+
 
 h1 {
     text-align: center;
