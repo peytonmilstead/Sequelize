@@ -9,6 +9,13 @@ window.onload = function () {
     },
     axisY: {
       prefix: '$'
+    },
+    toolTip: {
+      shared: true
+    },
+    legend: {
+      cursor: 'pointer',
+      itemclick: toggleDataSeries
     }
   });
 
