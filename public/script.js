@@ -27,7 +27,48 @@ window.onload = function () {
         xValueFormatString: 'DD, MMM',
         yValueFormatString: '$#,##0',
         dataPoints: [{ x: meal.meal_id, y: meal.calories }]
-      }]
+      },
+      {
+        type: 'stackedBar',
+        name: 'Carbs',
+        showInLegend: 'true',
+        xValueFormatString: 'DD, MMM',
+        yValueFormatString: '$#,##0',
+        dataPoints: [{ x: meal.meal_id, y: meal.carbs }]
+      },
+      {
+        type: 'stackedBar',
+        name: 'Protein',
+        showInLegend: 'true',
+        xValueFormatString: 'DD, MMM',
+        yValueFormatString: '$#,##0',
+        dataPoints: [{ x: meal.meal_id, y: meal.protein }]
+      },
+      {
+        type: 'stackedBar',
+        name: 'Fat',
+        showInLegend: 'true',
+        xValueFormatString: 'DD, MMM',
+        yValueFormatString: '$#,##0',
+        dataPoints: [{ x: meal.meal_id, y: meal.fat }]
+      },
+      {
+        type: 'stackedBar',
+        name: 'Sodium',
+        showInLegend: 'true',
+        xValueFormatString: 'DD, MMM',
+        yValueFormatString: '$#,##0',
+        dataPoints: [{ x: meal.meal_id, y: meal.sodium }]
+      },
+      {
+        type: 'stackedBar',
+        name: 'Cholesterol',
+        showInLegend: 'true',
+        xValueFormatString: 'DD, MMM',
+        yValueFormatString: '$#,##0',
+        dataPoints: [{ x: meal.meal_id, y: meal.cholesterol }]
+      }
+      ]
     });
   });
 };
