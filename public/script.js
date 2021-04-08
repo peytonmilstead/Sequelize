@@ -25,11 +25,6 @@ async function macroChart() {
 
   // create chart containing macro data for random meals
 
-  selectedMeals.forEach((meal) => {
-    const mealCal = [meal.meal_name, meal.calories];
-    console.log(mealCal);
-  });
-
   const chart = new CanvasJS.Chart('chartContainer', {
     animationEnabled: true,
     title: {
@@ -52,9 +47,8 @@ async function macroChart() {
       type: 'stackedBar',
       name: 'Calories',
       showInLegend: 'true',
-      // xValueFormatString: '##########',
-      // yValueFormatString: '####',
-      // dataPoints: mealCal
+      xValueFormatString: selectedMeals.meal_name,
+      yValueFormatString: '### cal',
       dataPoints: [
         { y: selectedMeals[0].calories },
         { y: selectedMeals[1].calories },
@@ -72,6 +66,8 @@ async function macroChart() {
       type: 'stackedBar',
       name: 'Carbs',
       showInLegend: 'true',
+      xValueFormatString: selectedMeals.meal_name,
+      yValueFormatString: '### g',
       dataPoints: [
         { y: selectedMeals[0].carbs },
         { y: selectedMeals[1].carbs },
@@ -89,6 +85,8 @@ async function macroChart() {
       type: 'stackedBar',
       name: 'Protein',
       showInLegend: 'true',
+      xValueFormatString: selectedMeals.meal_name,
+      yValueFormatString: '### g',
       dataPoints: [
         { y: selectedMeals[0].protein },
         { y: selectedMeals[1].protein },
@@ -106,6 +104,8 @@ async function macroChart() {
       type: 'stackedBar',
       name: 'Fat',
       showInLegend: 'true',
+      xValueFormatString: selectedMeals.meal_name,
+      yValueFormatString: '### g',
       dataPoints: [
         { y: selectedMeals[0].fat },
         { y: selectedMeals[1].fat },
@@ -123,6 +123,8 @@ async function macroChart() {
       type: 'stackedBar',
       name: 'Sodium',
       showInLegend: 'true',
+      xValueFormatString: selectedMeals.meal_name,
+      yValueFormatString: '### mg',
       dataPoints: [
         { y: selectedMeals[0].sodium },
         { y: selectedMeals[1].sodium },
@@ -140,17 +142,19 @@ async function macroChart() {
       type: 'stackedBar',
       name: 'Cholesterol',
       showInLegend: 'true',
+      xValueFormatString: selectedMeals.meal_name,
+      yValueFormatString: '### mg',
       dataPoints: [
-        { y: selectedMeals[0].cholersterol },
-        { y: selectedMeals[1].cholersterol },
-        { y: selectedMeals[2].cholersterol },
-        { y: selectedMeals[3].cholersterol },
-        { y: selectedMeals[4].cholersterol },
-        { y: selectedMeals[5].cholersterol },
-        { y: selectedMeals[6].cholersterol },
-        { y: selectedMeals[7].cholersterol },
-        { y: selectedMeals[8].cholersterol },
-        { y: selectedMeals[9].cholersterol }
+        { y: selectedMeals[0].cholesterol },
+        { y: selectedMeals[1].cholesterol },
+        { y: selectedMeals[2].cholesterol },
+        { y: selectedMeals[3].cholesterol },
+        { y: selectedMeals[4].cholesterol },
+        { y: selectedMeals[5].cholesterol },
+        { y: selectedMeals[6].cholesterol },
+        { y: selectedMeals[7].cholesterol },
+        { y: selectedMeals[8].cholesterol },
+        { y: selectedMeals[9].cholesterol }
       ]
     }]
   });
