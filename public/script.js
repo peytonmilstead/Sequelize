@@ -11,6 +11,65 @@ async function getMeals() {
   return mealData;
 }
 
+async function macroChart() {
+  const chart = new CanvasJS.Chart('chartContainer', {
+    animationEnabled: true,
+    title: {
+      text: 'Macro Data for 10 Random Meals'
+    },
+    axisX: {
+    },
+    axisY: {
+    },
+    toolTip: {
+      shared: true
+    },
+    legend: {
+      cursor: 'pointer',
+      itemclick: toggleDataSeries
+    },
+    data: [{
+      type: 'stackedBar',
+      name: 'Calories',
+      showInLegend: 'true',
+      // xValueFormatString: 'DD, MMM',
+      // yValueFormatString: '$#,##0',
+      dataPoints: [{ x: mealData.meal_id, y: mealData.calories }]
+    },
+    {
+      type: 'stackedBar',
+      name: 'Carbs',
+      showInLegend: 'true',
+      dataPoints: [{ x: mealData.meal_id, y: mealData.carbs }]
+    },
+    {
+      type: 'stackedBar',
+      name: 'Protein',
+      showInLegend: 'true',
+      dataPoints: [{ x: mealData.meal_id, y: mealData.protein }]
+    },
+    {
+      type: 'stackedBar',
+      name: 'Fat',
+      showInLegend: 'true',
+      dataPoints: [{ x: mealData.meal_id, y: mealData.fat }]
+    },
+    {
+      type: 'stackedBar',
+      name: 'Sodium',
+      showInLegend: 'true',
+      dataPoints: [{ x: mealData.meal_id, y: mealData.sodium }]
+    },
+    {
+      type: 'stackedBar',
+      name: 'Cholesterol',
+      showInLegend: 'true',
+      dataPoints: [{ x: mealData.meal_id, y: mealData.cholesterol }]
+    }
+    ]
+  });
+}
+
 async function populateRestaurants() {
   const diningRequest = await fetch('/api/dining');
   const diningData = await diningRequest.json();
