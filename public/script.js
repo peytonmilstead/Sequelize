@@ -1,77 +1,15 @@
-window.onload = function () {
-  const macroRequest = fetch('/api/macros');
-  const macroData = macroRequest.json();
-  macroData.data.forEach((meal) => {
-    const chart = new CanvasJS.Chart('chartContainer', {
-      animationEnabled: true,
-      title: {
-        text: 'Meal Macro Information'
-      },
-      axisX: {
-        valueFormatString: 'DDD'
-      },
-      axisY: {
-        prefix: '$'
-      },
-      toolTip: {
-        shared: true
-      },
-      legend: {
-        cursor: 'pointer',
-        itemclick: toggleDataSeries
-      },
-      data: [{
-        type: 'stackedBar',
-        name: 'Calories',
-        showInLegend: 'true',
-        // xValueFormatString: 'DD, MMM',
-        // yValueFormatString: '$#,##0',
-        dataPoints: [{ x: meal.meal_id, y: meal.calories }]
-      },
-      {
-        type: 'stackedBar',
-        name: 'Carbs',
-        showInLegend: 'true',
-        dataPoints: [{ x: meal.meal_id, y: meal.carbs }]
-      },
-      {
-        type: 'stackedBar',
-        name: 'Protein',
-        showInLegend: 'true',
-        dataPoints: [{ x: meal.meal_id, y: meal.protein }]
-      },
-      {
-        type: 'stackedBar',
-        name: 'Fat',
-        showInLegend: 'true',
-        dataPoints: [{ x: meal.meal_id, y: meal.fat }]
-      },
-      {
-        type: 'stackedBar',
-        name: 'Sodium',
-        showInLegend: 'true',
-        dataPoints: [{ x: meal.meal_id, y: meal.sodium }]
-      },
-      {
-        type: 'stackedBar',
-        name: 'Cholesterol',
-        showInLegend: 'true',
-        dataPoints: [{ x: meal.meal_id, y: meal.cholesterol }]
-      }
-      ]
-    });
-  });
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
-  chart.render();
-  function toggleDataSeries(e) {
-    if (typeof (e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
-      e.dataSeries.visible = false;
-    } else {
-      e.dataSeries.visible = true;
-    }
-    chart.render();
-  }
-};
+async function getMeals() {
+  console.log('data request');
+  const mealRequest = await fetch('/api/wholeMeal');
+  const mealData = await mealRequest.json();
+  return mealData;
+}
 
 async function populateRestaurants() {
   const diningRequest = await fetch('/api/dining');
@@ -89,11 +27,23 @@ async function populateRestaurants() {
     `;
 
     targetArea.append(appendItem);
-    console.table(diningData.data);
   });
 }
 
 async function windowActions() {
+  // meal macro chart
+  console.log('loaded window');
+  const results = await getMeals();
+  const meals = results.data;
+
+  const mealArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const selectedMeals = mealArray.map((element) => {
+    const random = getRandomIntInclusive(0, meals.length - 1);
+    return meals[random];
+  });
+  console.table(selectedMeals);
+
+  // dining hall table
   await populateRestaurants();
   console.log('loaded');
 }
