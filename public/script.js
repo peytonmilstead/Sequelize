@@ -1,34 +1,46 @@
 window.onload = function () {
-  const chart = new CanvasJS.Chart('chartContainer', {
-    animationEnabled: true,
-    title: {
-      text: 'Meal Macro Information'
-    },
-    axisX: {
-      valueFormatString: 'DDD'
-    },
-    axisY: {
-      prefix: '$'
-    },
-    toolTip: {
-      shared: true
-    },
-    legend: {
-      cursor: 'pointer',
-      itemclick: toggleDataSeries
-    }
+  const macroRequest = fetch('/api/macros');
+  const macroData = macroRequest.json();
+  macroData.data.forEach((meal) => {
+    const chart = new CanvasJS.Chart('chartContainer', {
+      animationEnabled: true,
+      title: {
+        text: 'Meal Macro Information'
+      },
+      axisX: {
+        valueFormatString: 'DDD'
+      },
+      axisY: {
+        prefix: '$'
+      },
+      toolTip: {
+        shared: true
+      },
+      legend: {
+        cursor: 'pointer',
+        itemclick: toggleDataSeries
+      },
+      data: [{
+        type: 'stackedBar',
+        name: 'Calories',
+        showInLegend: 'true',
+        xValueFormatString: 'DD, MMM',
+        yValueFormatString: '$#,##0',
+        dataPoints: [{ x: meal.meal_id, y: meal.calories }]
+      }]
+    });
   });
-
-  chart.render();
-  function toggleDataSeries(e) {
-    if (typeof (e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
-      e.dataSeries.visible = false;
-    } else {
-      e.dataSeries.visible = true;
-    }
-    chart.render();
-  }
 };
+
+chart.render();
+function toggleDataSeries(e) {
+  if (typeof (e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
+    e.dataSeries.visible = false;
+  } else {
+    e.dataSeries.visible = true;
+  }
+  chart.render();
+}
 
 async function populateRestaurants() {
   const diningRequest = await fetch('/api/dining');
