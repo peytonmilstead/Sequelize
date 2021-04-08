@@ -25,6 +25,11 @@ async function macroChart() {
 
   // create chart containing macro data for random meals
 
+  selectedMeals.forEach((meal) => {
+    const mealCal = [meal.meal_name, meal.calories];
+    console.log(mealCal);
+  });
+
   const chart = new CanvasJS.Chart('chartContainer', {
     animationEnabled: true,
     title: {
@@ -49,37 +54,38 @@ async function macroChart() {
       showInLegend: 'true',
       // xValueFormatString: '##########',
       // yValueFormatString: '####',
-      dataPoints: [{ x: selectedMeals.calories, y: selectedMeals.meal_name }]
+      // dataPoints: mealCal
+      dataPoints: [{ x: selectedMeals[0].calories, y: selectedMeals[0].meal_name }]
     },
     {
       type: 'stackedBar',
       name: 'Carbs',
       showInLegend: 'true',
-      dataPoints: [{ x: selectedMeals.carbs, y: selectedMeals.meal_name }]
+      dataPoints: [{ x: selectedMeals[0].carbs, y: selectedMeals[0].meal_name }]
     },
     {
       type: 'stackedBar',
       name: 'Protein',
       showInLegend: 'true',
-      dataPoints: [{ x: selectedMeals.protein, y: selectedMeals.meal_name }]
+      dataPoints: [{ x: selectedMeals[0].protein, y: selectedMeals[0].meal_name }]
     },
     {
       type: 'stackedBar',
       name: 'Fat',
       showInLegend: 'true',
-      dataPoints: [{ x: selectedMeals.fat, y: selectedMeals.meal_name }]
+      dataPoints: [{ x: selectedMeals[0].fat, y: selectedMeals[0].meal_name }]
     },
     {
       type: 'stackedBar',
       name: 'Sodium',
       showInLegend: 'true',
-      dataPoints: [{ x: selectedMeals.sodium, y: selectedMeals.meal_name }]
+      dataPoints: [{ x: selectedMeals[0].sodium, y: selectedMeals[0].meal_name }]
     },
     {
       type: 'stackedBar',
       name: 'Cholesterol',
       showInLegend: 'true',
-      dataPoints: [{ x: selectedMeals.cholesterol, y: selectedMeals.meal_name }]
+      dataPoints: [{ x: selectedMeals[0].cholesterol, y: selectedMeals[0].meal_name }]
     }]
   });
   chart.render();
