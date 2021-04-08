@@ -11,9 +11,7 @@ async function getMeals() {
   return mealData;
 }
 
-async function windowActions() {
-  // meal macro chart
-  console.log('loaded window');
+async function macroChart() {
   const results = await getMeals();
   const meals = results.data;
 
@@ -24,12 +22,6 @@ async function windowActions() {
   });
   console.table(selectedMeals);
 
-  // dining hall table
-  await populateRestaurants();
-  console.log('loaded');
-}
-
-async function macroChart() {
   const chart = new CanvasJS.Chart('chartContainer', {
     animationEnabled: true,
     title: {
@@ -85,6 +77,15 @@ async function macroChart() {
       dataPoints: [{ x: selectedMeals.cholesterol, y: selectedMeals.meal_name }]
     }]
   });
+  chart.render();
+  function toggleDataSeries(e) {
+    if (typeof (e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
+      e.dataSeries.visible = false;
+    } else {
+      e.dataSeries.visible = true;
+    }
+    chart.render();
+  }
 }
 
 async function populateRestaurants() {
@@ -104,6 +105,16 @@ async function populateRestaurants() {
 
     targetArea.append(appendItem);
   });
+}
+
+async function windowActions() {
+  // meal macro chart
+  console.log('loaded window');
+  await macroChart();
+
+  // dining hall table
+  await populateRestaurants();
+  console.log('loaded');
 }
 
 window.onload = windowActions;
