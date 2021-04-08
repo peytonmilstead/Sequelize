@@ -24,64 +24,54 @@ window.onload = function () {
         type: 'stackedBar',
         name: 'Calories',
         showInLegend: 'true',
-        xValueFormatString: 'DD, MMM',
-        yValueFormatString: '$#,##0',
+        // xValueFormatString: 'DD, MMM',
+        // yValueFormatString: '$#,##0',
         dataPoints: [{ x: meal.meal_id, y: meal.calories }]
       },
       {
         type: 'stackedBar',
         name: 'Carbs',
         showInLegend: 'true',
-        xValueFormatString: 'DD, MMM',
-        yValueFormatString: '$#,##0',
         dataPoints: [{ x: meal.meal_id, y: meal.carbs }]
       },
       {
         type: 'stackedBar',
         name: 'Protein',
         showInLegend: 'true',
-        xValueFormatString: 'DD, MMM',
-        yValueFormatString: '$#,##0',
         dataPoints: [{ x: meal.meal_id, y: meal.protein }]
       },
       {
         type: 'stackedBar',
         name: 'Fat',
         showInLegend: 'true',
-        xValueFormatString: 'DD, MMM',
-        yValueFormatString: '$#,##0',
         dataPoints: [{ x: meal.meal_id, y: meal.fat }]
       },
       {
         type: 'stackedBar',
         name: 'Sodium',
         showInLegend: 'true',
-        xValueFormatString: 'DD, MMM',
-        yValueFormatString: '$#,##0',
         dataPoints: [{ x: meal.meal_id, y: meal.sodium }]
       },
       {
         type: 'stackedBar',
         name: 'Cholesterol',
         showInLegend: 'true',
-        xValueFormatString: 'DD, MMM',
-        yValueFormatString: '$#,##0',
         dataPoints: [{ x: meal.meal_id, y: meal.cholesterol }]
       }
       ]
     });
   });
-};
 
-chart.render();
-function toggleDataSeries(e) {
-  if (typeof (e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
-    e.dataSeries.visible = false;
-  } else {
-    e.dataSeries.visible = true;
-  }
   chart.render();
-}
+  function toggleDataSeries(e) {
+    if (typeof (e.dataSeries.visible) === 'undefined' || e.dataSeries.visible) {
+      e.dataSeries.visible = false;
+    } else {
+      e.dataSeries.visible = true;
+    }
+    chart.render();
+  }
+};
 
 async function populateRestaurants() {
   const diningRequest = await fetch('/api/dining');
