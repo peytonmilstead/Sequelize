@@ -11,6 +11,24 @@ async function getMeals() {
   return mealData;
 }
 
+async function windowActions() {
+  // meal macro chart
+  console.log('loaded window');
+  const results = await getMeals();
+  const meals = results.data;
+
+  const mealArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const selectedMeals = mealArray.map((element) => {
+    const random = getRandomIntInclusive(0, meals.length - 1);
+    return meals[random];
+  });
+  console.table(selectedMeals);
+
+  // dining hall table
+  await populateRestaurants();
+  console.log('loaded');
+}
+
 async function macroChart() {
   const chart = new CanvasJS.Chart('chartContainer', {
     animationEnabled: true,
@@ -34,39 +52,38 @@ async function macroChart() {
       showInLegend: 'true',
       // xValueFormatString: 'DD, MMM',
       // yValueFormatString: '$#,##0',
-      dataPoints: [{ x: mealData.meal_id, y: mealData.calories }]
+      dataPoints: [{ x: selectedMeals.calories, y: selectedMeals.meal_name }]
     },
     {
       type: 'stackedBar',
       name: 'Carbs',
       showInLegend: 'true',
-      dataPoints: [{ x: mealData.meal_id, y: mealData.carbs }]
+      dataPoints: [{ x: selectedMeals.carbs, y: selectedMeals.meal_name }]
     },
     {
       type: 'stackedBar',
       name: 'Protein',
       showInLegend: 'true',
-      dataPoints: [{ x: mealData.meal_id, y: mealData.protein }]
+      dataPoints: [{ x: selectedMeals.protein, y: selectedMeals.meal_name }]
     },
     {
       type: 'stackedBar',
       name: 'Fat',
       showInLegend: 'true',
-      dataPoints: [{ x: mealData.meal_id, y: mealData.fat }]
+      dataPoints: [{ x: selectedMeals.fat, y: selectedMeals.meal_name }]
     },
     {
       type: 'stackedBar',
       name: 'Sodium',
       showInLegend: 'true',
-      dataPoints: [{ x: mealData.meal_id, y: mealData.sodium }]
+      dataPoints: [{ x: selectedMeals.sodium, y: selectedMeals.meal_name }]
     },
     {
       type: 'stackedBar',
       name: 'Cholesterol',
       showInLegend: 'true',
-      dataPoints: [{ x: mealData.meal_id, y: mealData.cholesterol }]
-    }
-    ]
+      dataPoints: [{ x: selectedMeals.cholesterol, y: selectedMeals.meal_name }]
+    }]
   });
 }
 
@@ -87,24 +104,6 @@ async function populateRestaurants() {
 
     targetArea.append(appendItem);
   });
-}
-
-async function windowActions() {
-  // meal macro chart
-  console.log('loaded window');
-  const results = await getMeals();
-  const meals = results.data;
-
-  const mealArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const selectedMeals = mealArray.map((element) => {
-    const random = getRandomIntInclusive(0, meals.length - 1);
-    return meals[random];
-  });
-  console.table(selectedMeals);
-
-  // dining hall table
-  await populateRestaurants();
-  console.log('loaded');
 }
 
 window.onload = windowActions;
