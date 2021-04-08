@@ -15,6 +15,7 @@ async function macroChart() {
   const results = await getMeals();
   const meals = results.data;
 
+  // get randomly selected meals
   const mealArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const selectedMeals = mealArray.map((element) => {
     const random = getRandomIntInclusive(0, meals.length - 1);
@@ -22,14 +23,18 @@ async function macroChart() {
   });
   console.table(selectedMeals);
 
+  // create chart containing macro data for random meals
+
   const chart = new CanvasJS.Chart('chartContainer', {
     animationEnabled: true,
     title: {
-      text: 'Macro Data for 10 Random Meals'
+      text: 'Macro Data for UMD Dining Hall Meals'
     },
     axisX: {
+      title: 'Meal Name'
     },
     axisY: {
+      title: 'Macro Info'
     },
     toolTip: {
       shared: true
@@ -42,8 +47,8 @@ async function macroChart() {
       type: 'stackedBar',
       name: 'Calories',
       showInLegend: 'true',
-      // xValueFormatString: 'DD, MMM',
-      // yValueFormatString: '$#,##0',
+      // xValueFormatString: '##########',
+      // yValueFormatString: '####',
       dataPoints: [{ x: selectedMeals.calories, y: selectedMeals.meal_name }]
     },
     {
